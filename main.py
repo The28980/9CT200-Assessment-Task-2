@@ -4,9 +4,9 @@ import time
 
 # +=================================================={ Data Frames }==================================================+
 df1 = pd.read_csv('notcode/thedata.csv', on_bad_lines='warn') # df1: DataFrame 1 - Original base data
-
-df2 = df1 # df2: DataFrame 2 - Updated base data
-
+df2 = df1.drop(columns=['ISRC', 'All Time Rank', 'Track Score', 'Spotify Playlist Count', 'Spotify Playlist Reach', 'Spotify Popularity', 'YouTube Likes', 'TikTok Posts', 'TikTok Likes', 'YouTube Playlist Reach', 'Apple Music Playlist Count', 'AirPlay Spins', 'SiriusXM Spins', 'Deezer Playlist Count', 'Deezer Playlist Reach', 'Amazon Playlist Count' ,'Pandora Streams', 'Pandora Track Stations', 'Soundcloud Streams', 'Shazam Counts', 'TIDAL Popularity', 'Explicit Track']) # df2: DataFrame 2 - Updated base data
+newest_df = df2.sort_values(by='Release Date')
+viewest_df = df2.sort_values(by='')
 # +=================================================={ Global Variables }==================================================+
 getout = False # Dictates whether the program runs or not.
 
@@ -14,13 +14,17 @@ getout = False # Dictates whether the program runs or not.
 def ShowOriginalData(): # Obligatory redundant function
     print(df1)
 
-def MainMenu(): # The main menu with 3 options
+def ShowUpdatedData(): # Obligatory redundant function 2 (this is the last one)
+    print(df2)
+
+def MainMenu(): # The main menu with 4 options
     global getout
     print("""
     Menu:
     1 - Load original dataset
-    2 - Search for something more specific
-    3 - Quit Program
+    2 - Load updated dataset
+    3 - Sort updated dataset
+    4 - Quit Program
     Please enter the number corresponding to your command""")
     
     try: # If statement but only the else part. Very useful for disobedient users.
@@ -33,34 +37,51 @@ def MainMenu(): # The main menu with 3 options
             ShowOriginalData()
             print("Menu will re-appear in 10 seconds")
             time.sleep(10)
+
+        if command == 2: # Option 2 displaying updated data, taking out unnecessary columns
+            print("Displaying Updated Data...")
+            time.sleep(1)
+            ShowUpdatedData()
+            print("Menu will re-appear in 10 seconds")
+            time.sleep(10)
         
-        elif command == 2: # Option 2 opening up a whole new menu
-            print("""What would you like to search for?
-    1 - Artist
-    2 - Album
+        elif command == 3: # Option 3 opening up a whole new menu
+            print("""How would you like to sort?
+    1 - Oldest -> Newest
+    2 - Popularity, descending
     3 - Return to main menu""")
             specify = int(input("-> "))
-            if specify == 1: # Option 2a for a specific artist
+            if specify == 1: # Option 3a to see them in ascending order, in terms of age
                 time.sleep(0.5)
-                print("")
-                print("Didn't think you'd make it this far (W.I.P)")
+                print("Displaying sorted dataframe...")
+                time.sleep(2)
+                print(newest_df)
                 time.sleep(0.5)
-            elif specify == 2: # Option 2b for a specific album
+                print("Menu will re-appear in 10 seconds")
+                time.sleep(10)
+
+            elif specify == 2: # Option 3b to see them in descending order, in terms of streams
                 time.sleep(0.5)
-                print("")
-                print("Go back go back go back (W.I.P)")
-                time.sleep(0.5)
-            elif specify == 3: # Option 2c to return to main menu
+                print("""Which platform would you like to see?
+    1 - Spotify
+    2 - Youtube
+    3 - TikTok
+    4 - Return to main menu""")
+                platform = int(input("-> "))
+                if platform == 1:
+                    print("filler text not bothered")
+
+            elif specify == 3: # Option 3c to return to main menu
                 print("Returning to main menu...")
                 time.sleep(1.5)
+
             else:
                 time.sleep(0.5)
                 print("""
 Not funny. Didn't laugh. 1-3. Try again user.""")
                 time.sleep(2.5)
 
-        
-        elif command == 3:
+        elif command == 4:
             print("Closing down program...") # Indicates the program is closing
             time.sleep(3)
             getout = True
@@ -68,7 +89,7 @@ Not funny. Didn't laugh. 1-3. Try again user.""")
         else:
             time.sleep(0.5)
             print("""
-Don't act like you can't count to 3 on one hand. Try again user.""")
+Don't act like you can't count to 4 on one hand. Try again user.""")
             time.sleep(2.5)
     except:
         time.sleep(0.5)
