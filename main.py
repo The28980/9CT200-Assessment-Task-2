@@ -4,9 +4,14 @@ import time
 
 # +=================================================={ Data Frames }==================================================+
 df1 = pd.read_csv('notcode/thedata.csv', on_bad_lines='warn') # df1: DataFrame 1 - Original base data
+
 df2 = df1.drop(columns=['ISRC', 'All Time Rank', 'Track Score', 'Spotify Playlist Count', 'Spotify Playlist Reach', 'Spotify Popularity', 'YouTube Likes', 'TikTok Posts', 'TikTok Likes', 'YouTube Playlist Reach', 'Apple Music Playlist Count', 'AirPlay Spins', 'SiriusXM Spins', 'Deezer Playlist Count', 'Deezer Playlist Reach', 'Amazon Playlist Count' ,'Pandora Streams', 'Pandora Track Stations', 'Soundcloud Streams', 'Shazam Counts', 'TIDAL Popularity', 'Explicit Track']) # df2: DataFrame 2 - Updated base data
-newest_df = df2.sort_values(by='Release Date')
-viewest_df = df2.sort_values(by='')
+df2.drop_duplicates(subset=['Track', 'Artist'], keep='first', inplace=True) # df2: Updated DataFrame - Cuts many columns and duplicates
+
+newest_df = df2.sort_values(by='Release Date', ascending=False)
+
+# viewest_df not listed on here because it changes depending on user inputs.
+
 # +=================================================={ Global Variables }==================================================+
 getout = False # Dictates whether the program runs or not.
 
@@ -47,11 +52,11 @@ def MainMenu(): # The main menu with 4 options
         
         elif command == 3: # Option 3 opening up a whole new menu
             print("""How would you like to sort?
-    1 - Oldest -> Newest
+    1 - Newest -> Oldest
     2 - Popularity, descending
     3 - Return to main menu""")
             specify = int(input("-> "))
-            if specify == 1: # Option 3a to see them in ascending order, in terms of age
+            if specify == 1: # Option 3a to see them in descending order, in terms of age
                 time.sleep(0.5)
                 print("Displaying sorted dataframe...")
                 time.sleep(2)
@@ -60,16 +65,52 @@ def MainMenu(): # The main menu with 4 options
                 print("Menu will re-appear in 10 seconds")
                 time.sleep(10)
 
-            elif specify == 2: # Option 3b to see them in descending order, in terms of streams
+            elif specify == 2: # Option 3b to see them in descending order, in terms of streams on platforms
                 time.sleep(0.5)
                 print("""Which platform would you like to see?
     1 - Spotify
-    2 - Youtube
+    2 - YouTube
     3 - TikTok
     4 - Return to main menu""")
                 platform = int(input("-> "))
                 if platform == 1:
-                    print("filler text not bothered")
+                    time.sleep(0.5)
+                    print("Filtering based on Spotify...")
+                    viewest_df = df2.drop(columns=['YouTube Views', 'TikTok Views'], inplace=True)
+                    viewest_df.sort_values(by='Spotify Streams', ascending=False, inplace=True)
+                    time.sleep(2)
+                    print(viewest_df)
+                    print("Menu will re-appear in 10 seconds")
+                    time.sleep(10)
+
+                elif platform == 2:
+                    time.sleep(0.5)
+                    print("Filtering based on YouTube...")
+                    viewest_df = df2.drop(columns=['Spotify Streams', 'TikTok Views'], inplace=True)
+                    viewest_df.sort_values(by='YouTube Views',ascending=False,inplace=True)
+                    time.sleep(2)
+                    print(viewest_df)
+                    print("Menu will re-appear in 10 seconds")
+                    time.sleep(10)
+
+                elif platform == 3:
+                    time.sleep(0.5)
+                    print("Filtering based on TikTok...")
+                    viewest_df = df2.drop(columns=['Spotify Streams', 'YouTube Views'], inplace=True)
+                    viewest_df.sort_values(by='TikTok Views',ascending=False,inplace=True)
+                    time.sleep(2)
+                    print(viewest_df)
+                    print("Menu will re-appear in 10 seconds")
+                    time.sleep(10)
+
+                elif platform ==4:
+                    time.sleep(0.5)
+                    print("Returning to main menu...")
+                    time.sleep(2)
+
+                else:
+                    time.sleep(0.5)
+                    print("What?")
 
             elif specify == 3: # Option 3c to return to main menu
                 print("Returning to main menu...")
