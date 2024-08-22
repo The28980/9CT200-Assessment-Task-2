@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 import time
 
 # +=================================================={ Data Frames }==================================================+
@@ -11,6 +12,14 @@ df2.drop_duplicates(subset=['Track', 'Artist'], keep='first', inplace=True) # df
 newest_df = df2.sort_values(by='Release Date', ascending=False)
 
 # viewest_df1, viewest_df2 and viewest_df3 not listed on here because they change depending on user inputs.
+
+# +=================================================={ MatPlotLib }==================================================+
+def df1plot():
+    #df1.plot(kind='bar', x='Track', y='Spotify Streams', color='purple', alpha=0.2, title='Base Dataframe; 2024 Spotify Songs')
+    y = np.array(df1["Spotify Streams"])
+    x = np.array(df1["Track"])
+    plt.bar(x,y)
+    plt.show()
 
 # +=================================================={ Global Variables }==================================================+
 getout = False # Dictates whether the program runs or not.
@@ -40,8 +49,21 @@ def MainMenu(): # The main menu with 4 options
             print("Displaying Original Data...")
             time.sleep(1)
             ShowOriginalData()
-            print("Menu will re-appear in 10 seconds")
-            time.sleep(10)
+            print("See as bar graph?")
+            bar1 = int(input("1: Yes/2: No -> "))
+            if bar1 == 2:
+                print("Menu will re-appear in 10 seconds")
+                time.sleep(10)
+
+            elif bar1 ==1:
+                df1plot()
+                print("Menu will re-appear in 10 seconds")
+                time.sleep(10)
+
+            else:
+                time.sleep(1)
+                print("Broken")
+                
 
         if command == 2: # Option 2 displaying updated data, taking out unnecessary columns
             print("Displaying Updated Data...")
