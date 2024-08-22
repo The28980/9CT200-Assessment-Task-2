@@ -10,7 +10,7 @@ df2.drop_duplicates(subset=['Track', 'Artist'], keep='first', inplace=True) # df
 
 newest_df = df2.sort_values(by='Release Date', ascending=False)
 
-# viewest_df not listed on here because it changes depending on user inputs.
+# viewest_df1, viewest_df2 and viewest_df3 not listed on here because they change depending on user inputs.
 
 # +=================================================={ Global Variables }==================================================+
 getout = False # Dictates whether the program runs or not.
@@ -76,30 +76,30 @@ def MainMenu(): # The main menu with 4 options
                 if platform == 1:
                     time.sleep(0.5)
                     print("Filtering based on Spotify...")
-                    viewest_df = df2.drop(columns=['YouTube Views', 'TikTok Views'], inplace=True)
-                    viewest_df.sort_values(by='Spotify Streams', ascending=False, inplace=True)
+                    viewest_df1=df2.drop(columns=['YouTube Views', 'TikTok Views'])
+                    viewest_df1=viewest_df1.sort_values('Spotify Streams', ascending=False)
                     time.sleep(2)
-                    print(viewest_df)
+                    print(viewest_df1)
                     print("Menu will re-appear in 10 seconds")
                     time.sleep(10)
 
                 elif platform == 2:
                     time.sleep(0.5)
                     print("Filtering based on YouTube...")
-                    viewest_df = df2.drop(columns=['Spotify Streams', 'TikTok Views'], inplace=True)
-                    viewest_df.sort_values(by='YouTube Views',ascending=False,inplace=True)
+                    viewest_df2 = df2.drop(columns=['Spotify Streams', 'TikTok Views'])
+                    viewest_df2=viewest_df2.sort_values('YouTube Views',ascending=False)
                     time.sleep(2)
-                    print(viewest_df)
+                    print(viewest_df2)
                     print("Menu will re-appear in 10 seconds")
                     time.sleep(10)
 
                 elif platform == 3:
                     time.sleep(0.5)
                     print("Filtering based on TikTok...")
-                    viewest_df = df2.drop(columns=['Spotify Streams', 'YouTube Views'], inplace=True)
-                    viewest_df.sort_values(by='TikTok Views',ascending=False,inplace=True)
+                    viewest_df3=df2.drop(columns=['Spotify Streams', 'YouTube Views'])
+                    viewest_df3=viewest_df3.sort_values('TikTok Views',ascending=False)
                     time.sleep(2)
-                    print(viewest_df)
+                    print(viewest_df3)
                     print("Menu will re-appear in 10 seconds")
                     time.sleep(10)
 
