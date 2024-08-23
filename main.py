@@ -15,19 +15,19 @@ newest_df = df2.sort_values(by='Release Date', ascending=False)
 
 # +=================================================={ MatPlotLib }==================================================+
  # Due to lack of access to matplotlib and pandas at home, I am unable to prove if this code works.
-def df1plot():
-    name1 = df1['Track'].head(110)
-    streams1 = df1['Spotify Streams'].head(11)
-    fig = plt.figure(figsize =(100, 10))
-    plt.bar(name1[0:100], streams1[0:10])
-    plt.show()
+# def df1plot():
+    # name1 = df1['Track'].head(110)
+    # streams1 = df1['Spotify Streams'].head(11)
+    # fig = plt.figure(figsize =(100, 10))
+    # plt.bar(name1[0:100], streams1[0:10])
+    # plt.show()
 
-def df2plot():
-    name2 = df2['Track'].head(110)
-    streams2 = df2['Spotify Streams'].head(11)
-    fig = plt.figure(figsize =(100, 10))
-    plt.bar(name2[0:100], streams2[0:10])
-    plt.show()
+# def df2plot():
+    # name2 = df2['Track'].head(110)
+    # streams2 = df2['Spotify Streams'].head(11)
+    # fig = plt.figure(figsize =(100, 10))
+    # plt.bar(name2[0:100], streams2[0:10])
+    # plt.show()
 
 # +=================================================={ Global Variables }==================================================+
 getout = False # Dictates whether the program runs or not.
@@ -57,42 +57,46 @@ def MainMenu(): # The main menu with 4 options
             print("Displaying Original Data...")
             time.sleep(1)
             ShowOriginalData()
-            print("See as bar graph?")
-            bar1 = int(input("1: Yes/2: No -> "))
-            if bar1 == 2:
-                print("Menu will re-appear in 10 seconds")
-                time.sleep(10)
+            print("Menu will re-appear in 10 seconds...")
+            time.sleep(10)
+            # print("See as bar graph?")
+            # bar1 = int(input("1: Yes/2: No -> "))
+            # if bar1 == 2:
+                # print("Menu will re-appear in 10 seconds")
+                # time.sleep(10)
 
-            elif bar1 ==1:
-                df1plot()
-                print("Menu will re-appear in 10 seconds")
-                time.sleep(10)
+            # elif bar1 ==1:
+                # df1plot()
+                # print("Menu will re-appear in 10 seconds")
+                # time.sleep(10)
 
-            else:
-                time.sleep(1)
-                print("Broken")
+            # else:
+                # time.sleep(1)
+                # print("Broken")
                 
 
         if command == 2: # Option 2 displaying updated data, taking out unnecessary columns
             print("Displaying Updated Data...")
             time.sleep(1)
             ShowUpdatedData()
-            print("See as bar graph?")
-            bar2 = int(input("1: Yes/2: No -> "))
-            if bar2 == 2:
-                print("Menu will re-appear in 10 seconds")
-                time.sleep(10)
-
-            elif bar2 ==1:
-                df2plot()
-                print("Menu will re-appear in 10 seconds")
-                time.sleep(10)
-
-            else:
-                time.sleep(1)
-                print("Broken")
-            print("Menu will re-appear in 10 seconds")
+            print("Menu will re-appear in 10 seconds...")
             time.sleep(10)
+            # print("See as bar graph?")
+            # bar2 = int(input("1: Yes/2: No -> "))
+            # if bar2 == 2:
+                # print("Menu will re-appear in 10 seconds")
+                # time.sleep(10)
+
+            # elif bar2 ==1:
+                # df2plot()
+                # print("Menu will re-appear in 10 seconds")
+                # time.sleep(10)
+
+            # else:
+                # time.sleep(1)
+                # print("Broken")
+            # print("Menu will re-appear in 10 seconds")
+            # time.sleep(10)
         
         elif command == 3: # Option 3 opening up a whole new menu
             print("""How would you like to sort?
